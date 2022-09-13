@@ -15,8 +15,8 @@ def get_weth():
     # Address
     account = get_account()
     weth = interface.IWeth(config["networks"][network.show_active()]["weth_token"])
-    wei = Web3.toWei(0.000001, "ether")
+    wei = Web3.toWei(0.1, "ether")
     tx = weth.deposit({"from": account, "value": wei})
     tx.wait(1)
-    print("Received 0.000001 WETH")
+    print("Received 0.1 WETH")
     return tx

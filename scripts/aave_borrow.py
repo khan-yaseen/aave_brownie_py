@@ -4,7 +4,8 @@ from scripts.get_weth import get_weth
 from web3 import Web3
 
 # 0.1
-amount = Web3.toWei(0.000001, "ether")
+amount = Web3.toWei(0.1, "ether")
+
 
 def main():
     account = get_account()
@@ -14,9 +15,33 @@ def main():
     # ABI
     # Address
     lending_pool = get_lending_pool()
+    print(lending_pool)
     # Approve sending out ERC20 tokens
     approve_erc20(amount, lending_pool.address, erc20_address, account)
-    print(lending_pool)
+    print("Depositing...")
+    tx = lending_pool.deposit(erc20_address, amount, account, 0, {"from": account})
+    tx.wait(1)
+    print("Deposited!")
+    borrowable_eth, total_debt = get_borrowable_data(lending_pool, account)
+
+
+def get_borrowable_data(lending_pool, account):
+    (
+        totalCollateralETH,
+        totalDebtETH,
+        availableBorrowsETH,
+        currentLiquidationThreshold,
+        ltv,
+        healthFactor,
+    ) = lending_pool.getUserAccountData(account.address)
+    totalCollateralETH = Web3.fromWei(totalCollateralETH, "ether")
+    totalDebtETH = Web3.fromWei(totalDebtETH, "ether")
+    availableBorrowsETH = Web3.fromWei(availableBorrowsETH, "ether")
+    print(f"You have {totalCollateralETH} worth of ETH deposited!")
+    print(f"You have {totalDebtETH} worth of ETH borrowed!")
+    print(f"You can borroe {availableBorrowsETH} worth of ETH!")
+    return (float(availableBorrowsETH), float(totalDebtETH))
+
 
 def approve_erc20(amount, spender, erc20_address, account):
     print("Approving ERC20 token..")
@@ -38,4 +63,3 @@ def get_lending_pool():
     # Address
     lending_pool = interface.ILendingPool(lending_pool_address)
     return lending_pool
-
