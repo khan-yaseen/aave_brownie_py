@@ -5,6 +5,7 @@ compiler:
     remappings:
       - "@aave=aave/protocol-v2@1.0.1"
 networks:
+  default: mainnet-fork-dev
   goerli:
     weth_token: "0x2e3A2fb8473316A02b8A297B982498E661E1f6f5"
     lending_pool_addresses_provider: "0x5E52dEc931FFb32f609681B8438A51c675cc232d"
