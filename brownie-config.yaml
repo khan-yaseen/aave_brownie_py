@@ -9,11 +9,18 @@ networks:
   goerli:
     weth_token: "0x2e3A2fb8473316A02b8A297B982498E661E1f6f5"
     lending_pool_addresses_provider: "0x5E52dEc931FFb32f609681B8438A51c675cc232d"
+    dai_eth_price_feed: "0x0d79df66BE487753B02D015Fb622DED7f0E9798d"
+    dai_token: "0xf2edF1c091f683E3fb452497d9a98A49cBA84666"
   mainnet-fork:
     weth_token: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    lending_pool_addresses_provider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5"
+    dai_eth_price_feed: "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9"
+    dai_token: "0x6B175474E89094C44Da98b954EedeAC495271d0F"
   mainnet-fork-dev:
     weth_token: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
     lending_pool_addresses_provider: "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5"
+    dai_eth_price_feed: "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9"
+    dai_token: "0x6B175474E89094C44Da98b954EedeAC495271d0F"
 dotenv: .env
 wallets:
   from_key: "${PRIVATE_KEY}"
